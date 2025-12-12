@@ -11,7 +11,8 @@ defineProps(['isScrolled'])
         <div v-motion-slide-visible-left :duration="700"
              class="md:w-1/2 relative">
            <div class="absolute inset-0 bg-primary translate-x-4 translate-y-4 rounded-2xl hidden md:block"></div>
-           <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Team" class="relative rounded-2xl shadow-xl md:shadow-2xl grayscale hover:grayscale-0 transition-all duration-500 w-full object-cover h-[300px] md:h-[400px]">
+           <!-- <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Team" class="relative rounded-2xl shadow-xl md:shadow-2xl grayscale hover:grayscale-0 transition-all duration-500 w-full object-cover h-[300px] md:h-[400px]"> -->
+            <img src="/Server.jpg" alt="Team" class="relative rounded-2xl shadow-xl md:shadow-2xl grayscale hover:grayscale-0 transition-all duration-500 w-full object-cover h-[300px] md:h-[400px]">
         </div>
         
         <div v-motion-slide-visible-right :duration="700" :delay="200"

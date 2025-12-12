@@ -1,27 +1,14 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, defineProps } from 'vue'
 import { Plus, Minus } from 'lucide-vue-next'
 
-defineProps(['isScrolled'])
-
-const faqs = [
-  {
-    question: 'Berapa lama proses pengerjaan website?',
-    answer: 'Tergantung kompleksitas. Untuk Company Profile standar biasanya 5-7 hari kerja. Untuk sistem kustom atau aplikasi mobile bisa 1-3 bulan.'
-  },
-  {
-    question: 'Apakah menyediakan layanan maintenance?',
-    answer: 'Ya, kami memberikan garansi bug fixing gratis selama 1 bulan setelah rilis. Kami juga menawarkan paket maintenance bulanan.'
-  },
-  {
-    question: 'Apakah domain dan hosting sudah termasuk?',
-    answer: 'Untuk paket tertentu sudah termasuk Domain .com dan Cloud Hosting selama 1 tahun pertama.'
-  },
-  {
-    question: 'Bisa custom fitur sesuai kebutuhan?',
-    answer: 'Tentu saja! Kami adalah software house, spesialisasi kami adalah membuat solusi kustom yang tidak bisa diakomodir oleh template biasa.'
+const props = defineProps({
+  isScrolled: Boolean,
+  dataFaqs: {
+    type: Array,
+    default: () => []
   }
-]
+})
 
 const openIndex = ref(null)
 
@@ -35,7 +22,10 @@ const toggleFaq = (index) => {
            :class="isScrolled ? 'bg-slate-50' : 'bg-dark-900'">
     <div class="container mx-auto px-6 max-w-3xl">
       
-      <div class="text-center mb-12">
+      <div v-motion
+           :initial="{ opacity: 0, y: 30 }"
+           :visible="{ opacity: 1, y: 0, transition: { duration: 600 } }"
+           class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold mb-4" :class="isScrolled ? 'text-slate-900' : 'text-white'">
           Sering Ditanyakan
         </h2>
@@ -45,7 +35,10 @@ const toggleFaq = (index) => {
       </div>
 
       <div class="space-y-4">
-        <div v-for="(faq, index) in faqs" :key="index"
+        <div v-for="(faq, index) in dataFaqs" :key="faq.id || index"
+             v-motion
+             :initial="{ opacity: 0, y: 20 }"
+             :visible="{ opacity: 1, y: 0, transition: { duration: 500, delay: index * 100 } }"
              class="border rounded-2xl overflow-hidden transition-all duration-300"
              :class="[
                isScrolled ? 'border-slate-200 bg-white' : 'border-white/10 bg-white/5',
@@ -54,7 +47,7 @@ const toggleFaq = (index) => {
           
           <button @click="toggleFaq(index)"
                   class="w-full flex justify-between items-center p-6 text-left focus:outline-none cursor-pointer group">
-            <span class="font-bold text-lg transition-colors" 
+            <span class="font-bold text-lg transition-colors pr-4" 
                   :class="[
                     isScrolled ? 'text-slate-800' : 'text-white',
                     openIndex === index ? 'text-primary' : ''
@@ -62,7 +55,7 @@ const toggleFaq = (index) => {
               {{ faq.question }}
             </span>
             
-            <span class="p-2 rounded-full transition-all duration-500 transform"
+            <span class="p-2 rounded-full transition-all duration-500 transform flex-shrink-0"
                   :class="[
                     openIndex === index 
                       ? 'bg-primary text-dark-900 rotate-180' 

@@ -2,49 +2,14 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { ArrowRight, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 
-defineProps(['isScrolled'])
-
-// --- 1. DATA PORTFOLIO ---
-const portfolios = [
-  {
-    id: 1,
-    title: 'Nura Skincare E-Commerce',
-    category: 'Web Development',
-    image: 'https://images.unsplash.com/photo-1661956602116-aa6865609028?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 2,
-    title: 'Qibla Finder App',
-    category: 'Mobile App (Flutter)',
-    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 3,
-    title: 'Finance Dashboard',
-    category: 'UI/UX Design',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 4,
-    title: 'Sainzlab Corporate Web',
-    category: 'Web Development',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 5,
-    title: 'Health Tracker Pro',
-    category: 'Mobile App (Flutter)',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 6,
-    title: 'Crypto Wallet UI',
-    category: 'UI/UX Design',
-    image: 'https://images.unsplash.com/photo-1621416894569-0f39ed31d247?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+const props = defineProps({
+  isScrolled: Boolean,
+  dataPortfolios: {
+    type: Array,
+    default: () => []
   }
-]
+})
 
-// --- 2. LOGIKA RESPONSIVE & PAGINATION ---
 const currentPage = ref(1)
 const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1200)
 
@@ -64,12 +29,13 @@ const itemsPerPage = computed(() => {
   return windowWidth.value < 768 ? 3 : 6
 })
 
-const totalPages = computed(() => Math.ceil(portfolios.length / itemsPerPage.value))
+const totalPages = computed(() => Math.ceil(props.dataPortfolios.length / itemsPerPage.value))
 
 const paginatedPortfolios = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value
   const end = start + itemsPerPage.value
-  return portfolios.slice(start, end)
+ 
+  return props.dataPortfolios.slice(start, end)
 })
 
 const nextPage = () => { if (currentPage.value < totalPages.value) currentPage.value++ }
@@ -104,11 +70,13 @@ const goToPage = (page) => { currentPage.value = page }
       </div>
       
       <div class="grid md:grid-cols-3 gap-6 md:gap-8 min-h-[400px]">
-         <div v-for="(item, index) in paginatedPortfolios" :key="item.id"
-              v-motion
-              :initial="{ opacity: 0, y: 50 }"
-              :visible="{ opacity: 1, y: 0, transition: { duration: 500, delay: index * 100 } }"
-              class="group relative rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+         <a v-for="(item, index) in paginatedPortfolios" :key="item.id"
+            :href="item.link" 
+            target="_blank"
+            v-motion
+            :initial="{ opacity: 0, y: 50 }"
+            :visible="{ opacity: 1, y: 0, transition: { duration: 500, delay: index * 100 } }"
+            class="group relative block rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 h-full">
           
           <img :src="item.image" :alt="item.title" 
                class="w-full h-[250px] md:h-[300px] object-cover transition-transform duration-700 group-hover:scale-110">
@@ -130,7 +98,7 @@ const goToPage = (page) => { currentPage.value = page }
             </h4>
           </div>
 
-        </div>
+        </a>
       </div>
 
       <div v-if="totalPages > 1" class="flex justify-center items-center mt-12 gap-3">

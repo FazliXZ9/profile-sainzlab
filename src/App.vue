@@ -1,6 +1,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useHomeData } from './composables/useHomeData' // 1. Import Composable
 
+// Import Components
 import Navbar from './components/Navbar.vue'
 import HeroSection from './components/HeroSection.vue'
 import AboutSection from './components/AboutSection.vue'
@@ -8,7 +10,6 @@ import ServicesSection from './components/ServicesSection.vue'
 import PortfolioSection from './components/PortfolioSection.vue'
 import FooterSection from './components/FooterSection.vue'
 import CatalogSection from './components/CatalogSection.vue'
-
 import ClientMarquee from './components/ClientMarquee.vue'
 import FaqSection from './components/FaqSection.vue'
 import FloatingWA from './components/FloatingWA.vue' 
@@ -19,8 +20,11 @@ const handleScroll = () => {
   isScrolled.value = window.scrollY > 50
 }
 
+const { services, portfolios, faqs, isLoading, fetchData } = useHomeData()
+
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+  fetchData()
 })
 
 onUnmounted(() => {
@@ -43,11 +47,23 @@ onUnmounted(() => {
     <main class="relative z-10">
       <HeroSection :isScrolled="isScrolled" />
       <AboutSection :isScrolled="isScrolled" />
-      <ServicesSection :isScrolled="isScrolled" />
-      <CatalogSection :isScrolled="isScrolled" />
-      <PortfolioSection :isScrolled="isScrolled" />
-      <ClientMarquee :isScrolled="isScrolled" /> 
-      <FaqSection :isScrolled="isScrolled" />
+      
+      <div v-if="isLoading" class="flex flex-col justify-center items-center py-32 min-h-[50vh]">
+         <div class="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
+         <p class="text-sm font-semibold tracking-wider animate-pulse opacity-70">Memuat Data...</p>
+      </div>
+
+      <div v-else>
+        <ServicesSection :isScrolled="isScrolled" :data-services="services" />
+        
+        <CatalogSection :isScrolled="isScrolled" :data-services="services" />
+        
+        <PortfolioSection :isScrolled="isScrolled" :data-portfolios="portfolios" />
+        
+        <ClientMarquee :isScrolled="isScrolled" /> 
+        
+        <FaqSection :isScrolled="isScrolled" :data-faqs="faqs" />
+      </div>
     </main>
     
     <FooterSection :isScrolled="isScrolled" />

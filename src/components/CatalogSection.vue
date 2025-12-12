@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { ArrowRight, MessageCircle, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 
 defineProps(['isScrolled'])
@@ -7,9 +7,35 @@ defineProps(['isScrolled'])
 const categories = ['Semua', 'Web Apps', 'Mobile Apps', 'Design', 'IoT']
 const activeCategory = ref('Semua')
 
-// --- 1. CONFIG PAGINATION ---
-const itemsPerPage = 6
+// --- 1. CONFIG PAGINATION (RESPONSIVE) ---
 const currentPage = ref(1)
+const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1200)
+
+// Fungsi untuk update lebar layar
+const handleResize = () => {
+  windowWidth.value = window.innerWidth
+}
+
+// Pasang listener saat komponen dimuat
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
+  handleResize() // inisialisasi awal
+})
+
+// Lepas listener saat komponen dihancurkan (mencegah memory leak)
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
+
+// Logika dinamis: Mobile (< 768px) = 3 item, Desktop = 6 item
+const itemsPerPage = computed(() => {
+  return windowWidth.value < 768 ? 3 : 6
+})
+
+// Reset ke halaman 1 jika mode layar berubah (misal user memutar HP dari portrait ke landscape)
+watch(itemsPerPage, () => {
+  currentPage.value = 1
+})
 
 const catalogItems = [
   {
@@ -88,15 +114,15 @@ const filteredItems = computed(() => {
   return catalogItems.filter(item => item.category === activeCategory.value)
 })
 
-// B. Hitung Total Halaman
+// B. Hitung Total Halaman (Update: Menggunakan .value karena itemsPerPage sekarang computed)
 const totalPages = computed(() => {
-  return Math.ceil(filteredItems.value.length / itemsPerPage)
+  return Math.ceil(filteredItems.value.length / itemsPerPage.value)
 })
 
-// C. Potong array untuk halaman saat ini (Pagination Logic)
+// C. Potong array untuk halaman saat ini (Update: Menggunakan .value)
 const paginatedItems = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage
-  const end = start + itemsPerPage
+  const start = (currentPage.value - 1) * itemsPerPage.value
+  const end = start + itemsPerPage.value
   return filteredItems.value.slice(start, end)
 })
 

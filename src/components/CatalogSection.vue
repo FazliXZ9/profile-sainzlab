@@ -1,38 +1,36 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
-import { ArrowRight, MessageCircle, ChevronLeft, ChevronRight } from 'lucide-vue-next'
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 
 defineProps(['isScrolled'])
 
 const categories = ['Semua', 'Web Apps', 'Mobile Apps', 'Design', 'IoT']
 const activeCategory = ref('Semua')
 
-// --- 1. CONFIG PAGINATION (RESPONSIVE) ---
+// --- 1. CONFIG RESPONSIVE & PAGINATION ---
 const currentPage = ref(1)
 const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1200)
 
-// Fungsi untuk update lebar layar
+// Deteksi lebar layar
 const handleResize = () => {
   windowWidth.value = window.innerWidth
 }
 
-// Pasang listener saat komponen dimuat
 onMounted(() => {
   window.addEventListener('resize', handleResize)
-  handleResize() // inisialisasi awal
+  handleResize()
 })
 
-// Lepas listener saat komponen dihancurkan (mencegah memory leak)
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
 })
 
-// Logika dinamis: Mobile (< 768px) = 3 item, Desktop = 6 item
+// Items per page dinamis: 3 di Mobile, 6 di Desktop
 const itemsPerPage = computed(() => {
   return windowWidth.value < 768 ? 3 : 6
 })
 
-// Reset ke halaman 1 jika mode layar berubah (misal user memutar HP dari portrait ke landscape)
+// Reset halaman jika ukuran layar berubah
 watch(itemsPerPage, () => {
   currentPage.value = 1
 })
@@ -106,7 +104,6 @@ const catalogItems = [
 
 // --- 2. LOGIKA FILTER & PAGINATION ---
 
-// A. Filter dulu berdasarkan kategori
 const filteredItems = computed(() => {
   if (activeCategory.value === 'Semua') {
     return catalogItems
@@ -114,33 +111,49 @@ const filteredItems = computed(() => {
   return catalogItems.filter(item => item.category === activeCategory.value)
 })
 
-// B. Hitung Total Halaman (Update: Menggunakan .value karena itemsPerPage sekarang computed)
+// Menggunakan .value karena itemsPerPage sekarang computed
 const totalPages = computed(() => {
   return Math.ceil(filteredItems.value.length / itemsPerPage.value)
 })
 
-// C. Potong array untuk halaman saat ini (Update: Menggunakan .value)
 const paginatedItems = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value
   const end = start + itemsPerPage.value
   return filteredItems.value.slice(start, end)
 })
 
-// D. Fungsi Ganti Halaman
-const nextPage = () => {
-  if (currentPage.value < totalPages.value) currentPage.value++
-}
-const prevPage = () => {
-  if (currentPage.value > 1) currentPage.value--
-}
-const goToPage = (page) => {
-  currentPage.value = page
+// --- FUNGSI SCROLL OTOMATIS ---
+const scrollToCatalog = () => {
+  const section = document.getElementById('katalog')
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 }
 
-// E. Reset halaman ke 1 jika kategori berubah
+// --- UPDATE NAVIGASI ---
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++
+    scrollToCatalog() // Auto scroll
+  }
+}
+
+const prevPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--
+    scrollToCatalog() // Auto scroll
+  }
+}
+
+const goToPage = (page) => {
+  currentPage.value = page
+  scrollToCatalog() // Auto scroll
+}
+
 const setCategory = (cat) => {
   activeCategory.value = cat
   currentPage.value = 1
+  // Optional: scrollToCatalog() jika ingin scroll saat ganti kategori
 }
 </script>
 

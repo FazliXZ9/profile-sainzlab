@@ -104,7 +104,6 @@ const motionConfig = {
   @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl;
 }
 
-/* Animasi Gradient Flow untuk Teks */
 @keyframes textFlow {
   0% { background-position: 0% 50%; }
   100% { background-position: 200% 50%; }
@@ -114,13 +113,11 @@ const motionConfig = {
   animation: textFlow 3s linear infinite;
 }
 
-/* Animasi Shimmer untuk Tombol */
 @keyframes shimmer {
   0% { transform: translateX(-150%) skewX(-12deg); }
   100% { transform: translateX(150%) skewX(-12deg); }
 }
 
-/* Animasi Floating Existing */
 @keyframes float {
   0%, 100% { transform: translateY(0px) rotate(45deg); }
   50% { transform: translateY(-20px) rotate(48deg); }

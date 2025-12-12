@@ -20,12 +20,12 @@ defineProps(['isScrolled'])
           <h3 class="text-3xl md:text-4xl font-bold mb-6">Solusi Teknologi Cerdas</h3>
           <p class="mb-6 leading-relaxed transition-colors duration-500"
              :class="isScrolled ? 'text-slate-600' : 'text-gray-400'">
-            Sainzlab adalah studio teknologi modern yang berfokus pada kualitas kode dan pengalaman pengguna.
+            Kami adalah penyedia solusi digital lengkap, berfokus membantu bisnis Anda tampil dan beroperasi optimal di dunia online. Mulai dari hosting web dan VPS berperforma tinggi, hingga pembuatan website dan aplikasi mobile yang modern.
           </p>
           <ul class="space-y-4">
-            <li class="flex items-center justify-center md:justify-start gap-3" :class="isScrolled ? 'text-slate-700' : 'text-gray-300'"><CheckCircle2 class="text-primary" /> Tim Expert IT & Dev.</li>
-            <li class="flex items-center justify-center md:justify-start gap-3" :class="isScrolled ? 'text-slate-700' : 'text-gray-300'"><CheckCircle2 class="text-primary" /> UI/UX Modern.</li>
-            <li class="flex items-center justify-center md:justify-start gap-3" :class="isScrolled ? 'text-slate-700' : 'text-gray-300'"><CheckCircle2 class="text-primary" /> High Performance Server.</li>
+            <li class="flex items-center justify-center md:justify-start gap-3" :class="isScrolled ? 'text-slate-700' : 'text-gray-300'"><CheckCircle2 class="text-primary" /> Web Hosting & VPS.</li>
+            <li class="flex items-center justify-center md:justify-start gap-3" :class="isScrolled ? 'text-slate-700' : 'text-gray-300'"><CheckCircle2 class="text-primary" /> Pembuatan Website.</li>
+            <li class="flex items-center justify-center md:justify-start gap-3" :class="isScrolled ? 'text-slate-700' : 'text-gray-300'"><CheckCircle2 class="text-primary" /> Aplikasi Mobile.</li>
           </ul>
         </div>
       </div>

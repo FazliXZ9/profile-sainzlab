@@ -2,48 +2,73 @@
 import { ArrowRight, Box } from 'lucide-vue-next'
 
 defineProps(['isScrolled'])
+
+const motionConfig = {
+  initial: { opacity: 0, y: 50, filter: 'blur(10px)' },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    filter: 'blur(0px)',
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 20,
+      mass: 0.8
+    }
+  }
+}
 </script>
 
 <template>
   <section id="home" class="container mx-auto px-6 pt-32 pb-16 md:pt-48 flex flex-col md:flex-row items-center min-h-[90vh]">
     <div class="md:w-1/2 mb-12 md:mb-0 relative text-center md:text-left">
-      <div v-motion-slide-visible-up :duration="500" :delay="100"
+      
+      <div v-motion="motionConfig" :delay="100"
            :class="[
         'inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-semibold mb-6 transition-colors duration-500',
         isScrolled ? 'bg-slate-100 border-slate-200 text-primary' : 'bg-white/5 border-white/10 text-primary'
       ]">
-        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+        </span>
         Available for projects
       </div>
 
-      <h1 v-motion-slide-visible-up :duration="600" :delay="200"
+      <h1 v-motion="motionConfig" :delay="200"
           class="text-4xl md:text-7xl font-bold leading-tight mb-6">
-        Inovasi Masa Depan <br class="hidden md:block" /> Bersama <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-yellow-500">Sainzlab</span>
+        Inovasi Masa Depan <br class="hidden md:block" /> 
+        Bersama 
+        <span class="animate-text-flow text-transparent bg-clip-text bg-gradient-to-r from-primary via-yellow-400 to-primary bg-[length:200%_auto]">
+          Sainzlab
+        </span>
       </h1>
       
-      <p v-motion-slide-visible-up :duration="600" :delay="300"
+      <p v-motion="motionConfig" :delay="300"
          class="text-base md:text-lg mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed transition-colors duration-500"
          :class="isScrolled ? 'text-slate-600' : 'text-gray-400'">
         Mitra teknologi strategis Anda. Mengubah ide kompleks menjadi solusi digital yang elegan.
       </p>
       
-      <div v-motion-slide-visible-up :duration="600" :delay="400"
+      <div v-motion="motionConfig" :delay="400"
            class="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
          
-         <a href="mailto:hello@sainzlab.com?subject=Konsultasi%20Proyek&body=Halo%20Tim%20Sainzlab,%20saya%20ingin%20berkonsultasi%20mengenai%20proyek..."
-            :class="[
-           'flex items-center justify-center font-bold px-8 py-3 rounded-full transition-all duration-300 hover:shadow-lg active:scale-95 cursor-pointer',
-           isScrolled ? 'bg-slate-900 text-white hover:bg-slate-700' : 'bg-white text-dark-900 hover:bg-gray-200'
-         ]">
-           Konsultasi
+         <a href="mailto:hello@sainzlab.com"
+            class="group relative overflow-hidden flex items-center justify-center font-bold px-8 py-3 rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(234,179,8,0.3)] active:scale-95 cursor-pointer"
+            :class="isScrolled ? 'bg-slate-900 text-white' : 'bg-white text-dark-900'">
+           
+           <div class="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/30 to-transparent z-10 w-full h-full skew-x-12"></div>
+           
+           <span class="relative z-20">Konsultasi</span>
          </a>
 
          <a href="#portfolio" 
             :class="[
-           'flex items-center justify-center gap-2 px-8 py-3 rounded-full border transition-all duration-300 hover:shadow-lg active:scale-95 cursor-pointer',
-           isScrolled ? 'border-slate-300 hover:bg-slate-100 text-slate-900' : 'border-white/20 hover:bg-white/5'
+           'group flex items-center justify-center gap-2 px-8 py-3 rounded-full border transition-all duration-300 active:scale-95 cursor-pointer',
+           isScrolled ? 'border-slate-300 hover:border-slate-800 text-slate-900' : 'border-white/20 hover:bg-white/10 text-white'
          ]">
-           Lihat Portfolio <ArrowRight :size="18"/>
+           Lihat Portfolio 
+           <ArrowRight :size="18" class="transition-transform duration-300 group-hover:translate-x-1"/>
          </a>
 
       </div>
@@ -78,6 +103,24 @@ defineProps(['isScrolled'])
 .glass-card {
   @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl;
 }
+
+/* Animasi Gradient Flow untuk Teks */
+@keyframes textFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.animate-text-flow {
+  animation: textFlow 3s linear infinite;
+}
+
+/* Animasi Shimmer untuk Tombol */
+@keyframes shimmer {
+  0% { transform: translateX(-150%) skewX(-12deg); }
+  100% { transform: translateX(150%) skewX(-12deg); }
+}
+
+/* Animasi Floating Existing */
 @keyframes float {
   0%, 100% { transform: translateY(0px) rotate(45deg); }
   50% { transform: translateY(-20px) rotate(48deg); }

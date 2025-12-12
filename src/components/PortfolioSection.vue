@@ -34,13 +34,13 @@ const portfolios = [
             <h3 class="text-3xl md:text-4xl font-bold">Karya Terbaru</h3>
             <p class="mt-4 text-sm md:text-base max-w-xl transition-colors duration-500"
                :class="isScrolled ? 'text-slate-500' : 'text-gray-400'">
-               Lihat bagaimana kami membantu klien mencapai tujuan bisnis mereka melalui solusi digital.
+               Temukan bagaimana kami mengubah ide anda menjadi kenyataan.
             </p>
          </div>
          
-         <a href="#" class="hidden md:flex items-center gap-2 font-semibold transition-colors group"
+         <a href="mailto:hello@sainzlab.com" class="hidden md:flex items-center gap-2 font-semibold transition-colors group"
             :class="isScrolled ? 'text-slate-900 hover:text-primary' : 'text-white hover:text-primary'">
-            Lihat Semua Proyek <ArrowRight :size="18" class="group-hover:translate-x-1 transition-transform"/>
+            Konsultasi <ArrowRight :size="18" class="group-hover:translate-x-1 transition-transform"/>
          </a>
       </div>
       

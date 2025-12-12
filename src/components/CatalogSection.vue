@@ -1,17 +1,29 @@
+Berikut adalah kode yang sudah disesuaikan dengan layanan Anda (**Web Hosting, VPS, Web Development, & Mobile Apps**).
+
+Saya telah memperbarui:
+
+1.  **Kategori Filter:** Menjadi `Hosting`, `VPS`, `Website`, dan `Mobile Apps`.
+2.  **Data Katalog:** Item produk diganti dengan paket hosting, VPS, dan jenis-jenis website/aplikasi yang umum dijual.
+3.  **Gambar:** Menggunakan URL gambar yang relevan dengan server dan coding.
+4.  **Harga:** Disesuaikan dengan estimasi pasar (per bulan untuk hosting/VPS, per project untuk web/app).
+
+<!-- end list -->
+
+```vue
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 
 defineProps(['isScrolled'])
 
-const categories = ['Semua', 'Web Apps', 'Mobile Apps', 'Design', 'IoT']
+// 1. KATEGORI DISESUAIKAN
+const categories = ['Semua', 'Hosting', 'VPS', 'Website', 'Mobile Apps']
 const activeCategory = ref('Semua')
 
-// --- 1. CONFIG RESPONSIVE & PAGINATION ---
+// --- CONFIG RESPONSIVE & PAGINATION ---
 const currentPage = ref(1)
 const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1200)
 
-// Deteksi lebar layar
 const handleResize = () => {
   windowWidth.value = window.innerWidth
 }
@@ -25,84 +37,83 @@ onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
 })
 
-// Items per page dinamis: 3 di Mobile, 6 di Desktop
 const itemsPerPage = computed(() => {
   return windowWidth.value < 768 ? 3 : 6
 })
 
-// Reset halaman jika ukuran layar berubah
 watch(itemsPerPage, () => {
   currentPage.value = 1
 })
 
+// 2. DATA PRODUK / LAYANAN DISESUAIKAN
 const catalogItems = [
   {
     id: 1,
-    title: 'Company Profile Website',
-    category: 'Web Apps',
-    desc: 'Website profesional untuk membangun citra bisnis digital Anda.',
+    title: 'Shared Hosting Starter',
+    category: 'Hosting',
+    desc: 'Cocok untuk pemula. Gratis SSL, bandwidth unlimited, dan cPanel.',
+    image: 'https://images.unsplash.com/photo-1558494949-ef526b004297?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    price: 'Rp 15.000/bln'
+  },
+  {
+    id: 2,
+    title: 'Cloud VPS Basic',
+    category: 'VPS',
+    desc: '1 vCPU, 2GB RAM, 40GB SSD. Full Root Access & Dedicated IP.',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    price: 'Rp 150.000/bln'
+  },
+  {
+    id: 3,
+    title: 'Website Company Profile',
+    category: 'Website',
+    desc: 'Website responsif untuk meningkatkan kredibilitas perusahaan Anda.',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     price: 'Mulai Rp 1.5jt'
   },
   {
-    id: 2,
-    title: 'Aplikasi Kasir (POS)',
-    category: 'Web Apps',
-    desc: 'Sistem manajemen penjualan lengkap dengan laporan keuangan.',
+    id: 4,
+    title: 'Toko Online (E-Commerce)',
+    category: 'Website',
+    desc: 'Website jualan lengkap dengan fitur keranjang dan payment gateway.',
     image: 'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    price: 'Custom'
+    price: 'Mulai Rp 3jt'
   },
   {
-    id: 3,
-    title: 'E-Commerce Mobile App',
+    id: 5,
+    title: 'Aplikasi Android Native',
     category: 'Mobile Apps',
-    desc: 'Aplikasi toko online Android & iOS dengan fitur payment gateway.',
+    desc: 'Aplikasi mobile performa tinggi khusus untuk pengguna Android.',
     image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     price: 'Custom'
   },
   {
-    id: 4,
-    title: 'UI/UX Design Kit',
-    category: 'Design',
-    desc: 'Desain antarmuka aplikasi yang modern, user-friendly, dan siap coding.',
-    image: 'https://images.unsplash.com/photo-1586717791821-3f44a5638d48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    price: 'Mulai Rp 500rb'
-  },
-  {
-    id: 5,
-    title: 'Smart Home System',
-    category: 'IoT',
-    desc: 'Kontrol perangkat rumah jarak jauh berbasis Internet of Things.',
-    image: 'https://images.unsplash.com/photo-1558002038-10917738179d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    price: 'Custom'
-  },
-  {
     id: 6,
-    title: 'Undangan Digital',
-    category: 'Web Apps',
-    desc: 'Website undangan pernikahan estetik dengan fitur RSVP.',
-    image: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    price: 'Mulai Rp 300rb'
+    title: 'Business Hosting Pro',
+    category: 'Hosting',
+    desc: 'Resource 2x lipat untuk traffic tinggi. Gratis domain .COM tahun pertama.',
+    image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    price: 'Rp 50.000/bln'
   },
   {
     id: 7,
-    title: 'Sistem Absensi Wajah',
-    category: 'IoT',
-    desc: 'Sistem absensi karyawan menggunakan AI Face Recognition.',
-    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    price: 'Custom'
+    title: 'High Performance VPS',
+    category: 'VPS',
+    desc: '4 vCPU, 8GB RAM. Ideal untuk server game atau aplikasi berat.',
+    image: 'https://images.unsplash.com/photo-1558002038-10917738179d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    price: 'Rp 450.000/bln'
   },
   {
     id: 8,
-    title: 'Landing Page UMKM',
-    category: 'Web Apps',
-    desc: 'Halaman penawaran khusus untuk meningkatkan konversi penjualan.',
-    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    price: 'Mulai Rp 800rb'
+    title: 'iOS & Android Hybrid App',
+    category: 'Mobile Apps',
+    desc: 'Satu coding untuk dua platform (Flutter/React Native). Lebih hemat.',
+    image: 'https://images.unsplash.com/photo-1526498460520-4c246339dccb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    price: 'Custom'
   }
 ]
 
-// --- 2. LOGIKA FILTER & PAGINATION ---
+// --- LOGIKA FILTER & PAGINATION ---
 
 const filteredItems = computed(() => {
   if (activeCategory.value === 'Semua') {
@@ -111,7 +122,6 @@ const filteredItems = computed(() => {
   return catalogItems.filter(item => item.category === activeCategory.value)
 })
 
-// Menggunakan .value karena itemsPerPage sekarang computed
 const totalPages = computed(() => {
   return Math.ceil(filteredItems.value.length / itemsPerPage.value)
 })
@@ -122,7 +132,6 @@ const paginatedItems = computed(() => {
   return filteredItems.value.slice(start, end)
 })
 
-// --- FUNGSI SCROLL OTOMATIS ---
 const scrollToCatalog = () => {
   const section = document.getElementById('katalog')
   if (section) {
@@ -130,30 +139,28 @@ const scrollToCatalog = () => {
   }
 }
 
-// --- UPDATE NAVIGASI ---
 const nextPage = () => {
   if (currentPage.value < totalPages.value) {
     currentPage.value++
-    scrollToCatalog() // Auto scroll
+    scrollToCatalog()
   }
 }
 
 const prevPage = () => {
   if (currentPage.value > 1) {
     currentPage.value--
-    scrollToCatalog() // Auto scroll
+    scrollToCatalog()
   }
 }
 
 const goToPage = (page) => {
   currentPage.value = page
-  scrollToCatalog() // Auto scroll
+  scrollToCatalog()
 }
 
 const setCategory = (cat) => {
   activeCategory.value = cat
   currentPage.value = 1
-  // Optional: scrollToCatalog() jika ingin scroll saat ganti kategori
 }
 </script>
 
@@ -166,11 +173,11 @@ const setCategory = (cat) => {
            :initial="{ opacity: 0, y: 30 }"
            :visible="{ opacity: 1, y: 0, transition: { duration: 600 } }"
            class="text-center max-w-3xl mx-auto mb-12">
-        <h2 class="text-primary font-semibold tracking-wider uppercase mb-2 text-sm md:text-base">Katalog</h2>
-        <h3 class="text-3xl md:text-4xl font-bold mb-4">Pilih Solusi Digital Anda</h3>
+        <h2 class="text-primary font-semibold tracking-wider uppercase mb-2 text-sm md:text-base">Paket & Layanan</h2>
+        <h3 class="text-3xl md:text-4xl font-bold mb-4">Pilih Solusi Kebutuhan Anda</h3>
         <p class="hidden md:block text-sm md:text-base leading-relaxed transition-colors duration-500"
            :class="isScrolled ? 'text-slate-500' : 'text-gray-400'">
-           Temukan berbagai layanan siap pakai yang kami tawarkan.
+           Mulai dari hosting personal hingga pembuatan sistem aplikasi perusahaan.
         </p>
       </div>
 
@@ -223,8 +230,8 @@ const setCategory = (cat) => {
                     :class="isScrolled ? 'bg-green-100 text-green-700' : 'bg-green-900 text-green-400'">
                 {{ item.price }}
               </span>
-              <a href="#" class="flex items-center gap-1 text-sm font-bold text-primary hover:gap-2 transition-all">
-                Konsultasi <ArrowRight :size="16" />
+              <a href="mailto:hello@sainzlab.com" class="flex items-center gap-1 text-sm font-bold text-primary hover:gap-2 transition-all">
+                Pesan / Tanya <ArrowRight :size="16" />
               </a>
             </div>
           </div>

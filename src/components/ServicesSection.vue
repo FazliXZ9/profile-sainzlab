@@ -1,23 +1,23 @@
 <script setup>
-import { Brain, BarChart3, Code2 } from 'lucide-vue-next'
+import { Cloud, Server, Smartphone } from 'lucide-vue-next'
 
 defineProps(['isScrolled'])
 
 const services = [
   {
-    title: 'AI & Machine Learning',
-    desc: 'Implementasi solusi cerdas untuk otomasi dan prediksi bisnis masa depan.',
-    icon: Brain
+    title: 'Web Hosting',
+    desc: 'Hosting super cepat, aman, dan stabil dengan jaminan uptime 99.9% untuk performa maksimal website bisnis Anda.',
+    icon: Cloud
   },
   {
-    title: 'Data Analytics',
-    desc: 'Ubah data mentah menjadi wawasan berharga untuk pengambilan keputusan strategis.',
-    icon: BarChart3
+    title: 'VPS Hosting',
+    desc: 'Kontrol penuh (Root Access) dengan performa tinggi dan resource dedicated untuk kebutuhan infrastruktur server yang kompleks.',
+    icon: Server
   },
   {
-    title: 'Software Development',
-    desc: 'Pengembangan aplikasi web dan mobile yang skalabel dengan teknologi terbaru.',
-    icon: Code2
+    title: 'Web & Mobile App',
+    desc: 'Jasa pembuatan website responsif dan aplikasi mobile (Android/iOS).',
+    icon: Smartphone
   }
 ]
 </script>
@@ -31,11 +31,11 @@ const services = [
            :initial="{ opacity: 0, y: 50 }"
            :visible="{ opacity: 1, y: 0, transition: { duration: 600 } }"
            class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
-        <h2 class="text-primary font-semibold tracking-wider uppercase mb-2 text-sm md:text-base">Layanan</h2>
-        <h3 class="text-3xl md:text-4xl font-bold mb-4">Layanan Unggulan</h3>
+        <h2 class="text-primary font-semibold tracking-wider uppercase mb-2 text-sm md:text-base">Layanan Kami</h2>
+        <h3 class="text-3xl md:text-4xl font-bold mb-4">Solusi Infrastruktur & Digital</h3>
          <p class="text-sm md:text-base leading-relaxed transition-colors duration-500"
            :class="isScrolled ? 'text-slate-500' : 'text-gray-400'">
-           Solusi terbaik yang kami tawarkan untuk membantu pertumbuhan bisnis digital Anda.
+           Dari infrastruktur server yang handal hingga pengembangan aplikasi presisi untuk mengakselerasi bisnis Anda.
         </p>
       </div>
       
@@ -45,18 +45,23 @@ const services = [
              :initial="{ opacity: 0, y: 100 }"
              :visible="{ opacity: 1, y: 0, transition: { duration: 800, delay: index * 200 } }"
              :class="[
-               'p-6 md:p-8 group transition-all duration-300 hover:-translate-y-2 border rounded-2xl hover:shadow-xl',
+               'p-6 md:p-8 group transition-all duration-300 hover:-translate-y-2 border rounded-2xl hover:shadow-2xl cursor-default',
                isScrolled 
-                  ? 'bg-white border-slate-100 shadow-sm' 
+                  ? 'bg-white border-slate-100 shadow-sm hover:shadow-slate-200' 
                   : 'glass-card hover:bg-white/10 hover:border-primary/30'
              ]">
+          
           <div :class="[
-            'w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-300 border',
+            'w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 border shadow-sm',
             isScrolled ? 'bg-slate-50 border-slate-100 text-primary' : 'bg-dark-900 border-white/10 text-primary'
           ]">
-            <component :is="service.icon" class="w-6 h-6 md:w-7 md:h-7" />
+            <component :is="service.icon" class="w-7 h-7" stroke-width="1.5" />
           </div>
-          <h4 class="text-lg md:text-xl font-bold mb-3 group-hover:text-primary transition-colors">{{ service.title }}</h4>
+
+          <h4 class="text-lg md:text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">
+            {{ service.title }}
+          </h4>
+          
           <p class="text-sm leading-relaxed transition-colors duration-500"
              :class="isScrolled ? 'text-slate-500' : 'text-gray-400'">
              {{ service.desc }}

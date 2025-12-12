@@ -20,17 +20,17 @@ defineProps(['isScrolled'])
         </div>
         
         <div class="flex gap-4">
-           <a href="#" :class="isScrolled ? 'border-slate-200 text-slate-400 hover:bg-slate-100' : 'border-white/10 text-gray-400 hover:bg-white hover:text-dark-900'" 
+           <a href="https://github.com/FazliXZ9" :class="isScrolled ? 'border-slate-200 text-slate-400 hover:bg-slate-100' : 'border-white/10 text-gray-400 hover:bg-white hover:text-dark-900'" 
               class="w-10 h-10 rounded-full border flex items-center justify-center transition-all hover:scale-110 active:scale-95">
               <Github :size="20"/>
            </a>
 
-           <a href="#" :class="isScrolled ? 'border-slate-200 text-slate-400 hover:bg-slate-100' : 'border-white/10 text-gray-400 hover:bg-white hover:text-dark-900'" 
+           <a href="https://www.instagram.com/makkanbang_" :class="isScrolled ? 'border-slate-200 text-slate-400 hover:bg-slate-100' : 'border-white/10 text-gray-400 hover:bg-white hover:text-dark-900'" 
               class="w-10 h-10 rounded-full border flex items-center justify-center transition-all hover:scale-110 active:scale-95">
               <Instagram :size="20"/>
            </a>
 
-           <a href="https://discord.gg/invite-code" target="_blank"
+           <a href="https://discord.com/users/INTERNET%20POSITIF%20!!!" target="_blank"
               :class="isScrolled ? 'border-slate-200 text-slate-400 hover:bg-slate-100' : 'border-white/10 text-gray-400 hover:bg-[#5865F2] hover:text-white hover:border-[#5865F2]'" 
               class="w-10 h-10 rounded-full border flex items-center justify-center transition-all hover:scale-110 active:scale-95">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">

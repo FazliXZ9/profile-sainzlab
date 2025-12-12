@@ -25,7 +25,7 @@ defineProps(['isScrolled'])
       </div>
       <div class="text-center text-sm border-t pt-8 transition-colors duration-500"
            :class="isScrolled ? 'text-slate-500 border-slate-200' : 'text-gray-600 border-white/5'">
-        &copy; 2025 Sainzlab. All rights reserved.
+        &copy;2025 Sainzlab.my.id | Muhammad Fazli M
       </div>
     </div>
   </footer>

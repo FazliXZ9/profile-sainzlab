@@ -6,7 +6,6 @@ import { MotionPlugin } from '@vueuse/motion'
 
 const app = createApp(App)
 
-// Pasang plugin Motion sebelum di-mount
 app.use(MotionPlugin)
 
 app.mount('#app')

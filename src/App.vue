@@ -9,6 +9,10 @@ import PortfolioSection from './components/PortfolioSection.vue'
 import FooterSection from './components/FooterSection.vue'
 import CatalogSection from './components/CatalogSection.vue'
 
+import ClientMarquee from './components/ClientMarquee.vue'
+import FaqSection from './components/FaqSection.vue'
+import FloatingWA from './components/FloatingWA.vue' 
+
 const isScrolled = ref(false)
 
 const handleScroll = () => {
@@ -40,11 +44,15 @@ onUnmounted(() => {
       <HeroSection :isScrolled="isScrolled" />
       <AboutSection :isScrolled="isScrolled" />
       <ServicesSection :isScrolled="isScrolled" />
-      <PortfolioSection :isScrolled="isScrolled" />
       <CatalogSection :isScrolled="isScrolled" />
+      <PortfolioSection :isScrolled="isScrolled" />
+      <ClientMarquee :isScrolled="isScrolled" /> 
+      <FaqSection :isScrolled="isScrolled" />
     </main>
     
     <FooterSection :isScrolled="isScrolled" />
+
+    <FloatingWA />
 
   </div>
 </template>

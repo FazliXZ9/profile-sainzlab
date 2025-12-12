@@ -29,18 +29,23 @@ defineProps(['isScrolled'])
       
       <div v-motion-slide-visible-up :duration="600" :delay="400"
            class="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
-         <button :class="[
-           'font-bold px-8 py-3 rounded-full transition-all duration-300 hover:shadow-lg active:scale-95',
+         
+         <a href="mailto:hello@sainzlab.com?subject=Konsultasi%20Proyek&body=Halo%20Tim%20Sainzlab,%20saya%20ingin%20berkonsultasi%20mengenai%20proyek..."
+            :class="[
+           'flex items-center justify-center font-bold px-8 py-3 rounded-full transition-all duration-300 hover:shadow-lg active:scale-95 cursor-pointer',
            isScrolled ? 'bg-slate-900 text-white hover:bg-slate-700' : 'bg-white text-dark-900 hover:bg-gray-200'
          ]">
-           Mulai Proyek
-         </button>
-         <button :class="[
-           'flex items-center justify-center gap-2 px-8 py-3 rounded-full border transition-all duration-300 hover:shadow-lg active:scale-95',
+           Konsultasi
+         </a>
+
+         <a href="#portfolio" 
+            :class="[
+           'flex items-center justify-center gap-2 px-8 py-3 rounded-full border transition-all duration-300 hover:shadow-lg active:scale-95 cursor-pointer',
            isScrolled ? 'border-slate-300 hover:bg-slate-100 text-slate-900' : 'border-white/20 hover:bg-white/5'
          ]">
            Lihat Portfolio <ArrowRight :size="18"/>
-         </button>
+         </a>
+
       </div>
     </div>
 

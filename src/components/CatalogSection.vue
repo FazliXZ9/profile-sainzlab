@@ -1,26 +1,12 @@
-Berikut adalah kode yang sudah disesuaikan dengan layanan Anda (**Web Hosting, VPS, Web Development, & Mobile Apps**).
-
-Saya telah memperbarui:
-
-1.  **Kategori Filter:** Menjadi `Hosting`, `VPS`, `Website`, dan `Mobile Apps`.
-2.  **Data Katalog:** Item produk diganti dengan paket hosting, VPS, dan jenis-jenis website/aplikasi yang umum dijual.
-3.  **Gambar:** Menggunakan URL gambar yang relevan dengan server dan coding.
-4.  **Harga:** Disesuaikan dengan estimasi pasar (per bulan untuk hosting/VPS, per project untuk web/app).
-
-<!-- end list -->
-
-```vue
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 
 defineProps(['isScrolled'])
 
-// 1. KATEGORI DISESUAIKAN
 const categories = ['Semua', 'Hosting', 'VPS', 'Website', 'Mobile Apps']
 const activeCategory = ref('Semua')
 
-// --- CONFIG RESPONSIVE & PAGINATION ---
 const currentPage = ref(1)
 const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 1200)
 
@@ -45,7 +31,6 @@ watch(itemsPerPage, () => {
   currentPage.value = 1
 })
 
-// 2. DATA PRODUK / LAYANAN DISESUAIKAN
 const catalogItems = [
   {
     id: 1,
@@ -112,8 +97,6 @@ const catalogItems = [
     price: 'Custom'
   }
 ]
-
-// --- LOGIKA FILTER & PAGINATION ---
 
 const filteredItems = computed(() => {
   if (activeCategory.value === 'Semua') {

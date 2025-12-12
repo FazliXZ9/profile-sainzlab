@@ -48,7 +48,6 @@ const clients = [
     link: 'https://mikrotik.com/documentation' 
   },
 
-  // --- DUPLIKASI (Agar animasi seamless) ---
   { name: 'Vue.js', logo: 'https://cdn.worldvectorlogo.com/logos/vue-9.svg', link: 'https://vuejs.org/' },
   { name: 'Tailwind CSS', logo: 'https://cdn.worldvectorlogo.com/logos/tailwindcss.svg', link: 'https://tailwindcss.com/' },
   { name: 'Laravel', logo: 'https://cdn.worldvectorlogo.com/logos/laravel-2.svg', link: 'https://laravel.com/' },

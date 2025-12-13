@@ -49,7 +49,7 @@ const goToPage = (page) => { currentPage.value = page; scrollToCatalog() }
 const setCategory = (cat) => { activeCategory.value = cat }
 
 const generateEmailLink = (item) => {
-  const email = "hello@sainzlab.com"
+  const email = "muhammadfazli@sainzlab.my.id"
   const subject = encodeURIComponent(`Tanya Layanan: ${item.title}`)
   const body = encodeURIComponent(`Halo Tim Sainzlab,\n\nSaya tertarik dengan layanan: ${item.title}\nKategori: ${item.category}\n\nMohon info lebih lanjut.`)
   return `mailto:${email}?subject=${subject}&body=${body}`

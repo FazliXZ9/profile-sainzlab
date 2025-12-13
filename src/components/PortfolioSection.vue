@@ -63,7 +63,7 @@ const goToPage = (page) => { currentPage.value = page }
             </p>
          </div>
          
-         <a href="mailto:hello@sainzlab.com" class="hidden md:flex items-center gap-2 font-semibold transition-colors group"
+         <a href="mailto:muhammadfazli@sainzlab.my.id" class="hidden md:flex items-center gap-2 font-semibold transition-colors group"
             :class="isScrolled ? 'text-slate-900 hover:text-primary' : 'text-white hover:text-primary'">
             Konsultasi <ArrowRight :size="18" class="group-hover:translate-x-1 transition-transform"/>
          </a>

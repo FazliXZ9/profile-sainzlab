@@ -3,7 +3,7 @@ import { Mail } from 'lucide-vue-next'
 </script>
 
 <template>
-  <a href="mailto:hello@sainzlab.com?subject=Halo%20Sainzlab&body=Saya%20tertarik%20dengan%20layanan%20Anda." 
+  <a href="mailto:muhammadfazli@sainzlab.my.id?subject=Halo%20Sainzlab&body=Saya%20tertarik%20dengan%20layanan%20Anda." 
      class="fixed bottom-6 right-6 z-50 group">
     
     <div class="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-white text-slate-800 text-xs font-bold py-1.5 px-3 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">

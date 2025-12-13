@@ -38,7 +38,7 @@ defineProps(['isScrolled'])
               </svg>
            </a>
 
-           <a href="mailto:hello@sainzlab.com" 
+           <a href="mailto:muhammadfazli@sainzlab.my.id" 
               :class="isScrolled ? 'border-slate-200 text-slate-400 hover:bg-slate-100' : 'border-white/10 text-gray-400 hover:bg-white hover:text-dark-900'" 
               class="w-10 h-10 rounded-full border flex items-center justify-center transition-all hover:scale-110 active:scale-95">
               <Mail :size="20"/>

@@ -53,7 +53,7 @@ const motionConfig = {
       <div v-motion="motionConfig" :delay="400"
            class="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
          
-         <a href="mailto:hello@sainzlab.com"
+         <a href="mailto:muhammadfazli@sainzlab.my.id"
             class="group relative overflow-hidden flex items-center justify-center font-bold px-8 py-3 rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(234,179,8,0.3)] active:scale-95 cursor-pointer"
             :class="isScrolled ? 'bg-slate-900 text-white' : 'bg-white text-dark-900'">
            

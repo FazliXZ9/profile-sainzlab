@@ -33,7 +33,7 @@ const isMobileMenuOpen = ref(false)
         </a>
       </div>
 
-      <a href="mailto:hello@sainzlab.com?subject=Konsultasi%20Proyek&body=Halo%20Tim%20Sainzlab,%20saya%20ingin%20berkonsultasi%20mengenai%20proyek..." class="hidden md:block">
+      <a href="mailto:muhammadfazli@sainzlab.my.id?subject=Konsultasi%20Proyek&body=Halo%20Tim%20Sainzlab,%20saya%20ingin%20berkonsultasi%20mengenai%20proyek..." class="hidden md:block">
         <button class="bg-primary hover:bg-yellow-500 text-dark-900 font-bold px-5 py-2 rounded-full text-sm transition-all shadow-[0_0_15px_rgba(255,193,7,0.4)] hover:shadow-[0_0_25px_rgba(255,193,7,0.6)] active:scale-95">
           Hubungi Kami
         </button>

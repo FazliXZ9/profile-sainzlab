@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { ArrowRight, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-vue-next'
+import { ArrowRight, ExternalLink, ChevronLeft, ChevronRight, Box } from 'lucide-vue-next'
 
 const props = defineProps({
   isScrolled: Boolean,
@@ -31,11 +31,17 @@ const itemsPerPage = computed(() => {
 
 const totalPages = computed(() => Math.ceil(props.dataPortfolios.length / itemsPerPage.value))
 
+// --- LOGIKA SORTING (TERBARU DULUAN) ---
 const paginatedPortfolios = computed(() => {
+  // 1. Buat salinan array [...props] agar tidak merusak data asli
+  // 2. Gunakan .reverse() untuk membalik urutan (Input Terakhir -> Jadi Pertama)
+  const sortedData = [...props.dataPortfolios].reverse()
+  
   const start = (currentPage.value - 1) * itemsPerPage.value
   const end = start + itemsPerPage.value
- 
-  return props.dataPortfolios.slice(start, end)
+  
+  // 3. Potong data yang sudah dibalik sesuai halaman
+  return sortedData.slice(start, end)
 })
 
 const nextPage = () => { if (currentPage.value < totalPages.value) currentPage.value++ }
@@ -69,33 +75,48 @@ const goToPage = (page) => { currentPage.value = page }
          </a>
       </div>
       
-      <div class="grid md:grid-cols-3 gap-6 md:gap-8 min-h-[400px]">
+      <div class="grid md:grid-cols-3 gap-6 md:gap-8 min-h-[355px]">
          <a v-for="(item, index) in paginatedPortfolios" :key="item.id"
             :href="item.link" 
             target="_blank"
             v-motion
             :initial="{ opacity: 0, y: 50 }"
             :visible="{ opacity: 1, y: 0, transition: { duration: 500, delay: index * 100 } }"
-            class="group relative block rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 h-full">
+            class="group relative block rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 w-full">
           
-          <img :src="item.image" :alt="item.title" 
-               class="w-full h-[250px] md:h-[300px] object-cover transition-transform duration-700 group-hover:scale-110">
-          
-          <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/80 to-transparent 
-                      opacity-100 md:opacity-0 md:group-hover:opacity-100 
-                      transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8">
+          <div class="relative w-full aspect-[4/3] bg-gray-800 overflow-hidden">
             
-            <span class="text-primary text-sm font-semibold mb-2 
+            <template v-if="item.image">
+               <img :src="item.image" :alt="item.title" 
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            </template>
+
+            <template v-else>
+               <div class="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-gray-800 to-gray-900">
+                  <div class="mb-2 text-primary opacity-50"><Box :size="32" /></div>
+                  <span class="font-bold text-lg text-gray-500 text-center leading-tight select-none">
+                    {{ item.title }}
+                  </span>
+               </div>
+            </template>
+
+            <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/80 to-transparent 
+                        opacity-100 md:opacity-0 md:group-hover:opacity-100 
+                        transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8 z-10">
+              
+              <span class="text-primary text-sm font-semibold mb-2 
+                           translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 
+                           transition-transform duration-300 delay-75">
+                {{ item.category }}
+              </span>
+              
+              <h4 class="text-xl md:text-2xl font-bold flex items-center gap-2 text-white 
                          translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 
-                         transition-transform duration-300 delay-75">
-              {{ item.category }}
-            </span>
-            
-            <h4 class="text-xl md:text-2xl font-bold flex items-center gap-2 text-white 
-                       translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 
-                       transition-transform duration-300">
-              {{ item.title }} <ExternalLink :size="18" />
-            </h4>
+                         transition-transform duration-300">
+                {{ item.title }} <ExternalLink :size="18" />
+              </h4>
+            </div>
+
           </div>
 
         </a>

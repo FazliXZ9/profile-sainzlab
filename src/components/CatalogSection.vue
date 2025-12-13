@@ -10,7 +10,7 @@ const props = defineProps({
   }
 })
 
-const ADMIN_URL = 'http://127.0.0.1:8000'
+const ADMIN_URL = 'https://admin.sainzlab.my.id'
 
 const categories = ['Semua', 'Hosting', 'VPS', 'Website', 'Mobile Apps']
 const activeCategory = ref('Semua')
@@ -111,12 +111,12 @@ const generateEmailLink = (item) => {
                 {{ item.category }}
               </span>
 
-              <a :href="`${ADMIN_URL}/admin/services/${item.id}/edit`" 
+              <!-- <a :href="`${ADMIN_URL}/admin/services/${item.id}/edit`" 
                  target="_blank"
                  class="absolute top-4 left-4 bg-white/90 text-slate-700 p-2 rounded-full shadow-lg hover:bg-red-500 hover:text-white transition-all duration-300 z-10 opacity-0 group-hover:opacity-100 translate-y-[-10px] group-hover:translate-y-0"
                  title="Edit di Admin Panel">
                  <Edit :size="16" />
-              </a>
+              </a> -->
 
             </div>
 

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted, defineProps } from 'vue'
-import { ArrowRight, ChevronLeft, ChevronRight, Edit, Box } from 'lucide-vue-next' 
+import { ArrowRight, ChevronLeft, ChevronRight, Edit, Box, Info } from 'lucide-vue-next' 
 
 const props = defineProps({
   isScrolled: Boolean,
@@ -91,42 +91,46 @@ const generateEmailLink = (item) => {
                :class="isScrolled ? 'bg-white border-slate-100 shadow-sm' : 'bg-white/5 border-white/10'">
             
             <div class="relative h-48 overflow-hidden bg-gray-100">
-              
               <template v-if="item.image">
                 <img :src="item.image" :alt="item.title" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
               </template>
-
               <template v-else>
                 <div class="w-full h-full flex flex-col items-center justify-center p-4 bg-gradient-to-br from-slate-100 to-slate-200 group-hover:from-slate-200 group-hover:to-slate-300 transition-colors duration-500">
-                  <div class="mb-2 text-primary opacity-50">
-                     <Box :size="32" /> 
-                  </div>
-                  <span class="font-bold text-lg text-slate-400 text-center leading-tight select-none">
-                    {{ item.title }}
-                  </span>
+                  <div class="mb-2 text-primary opacity-50"><Box :size="32" /></div>
+                  <span class="font-bold text-lg text-slate-400 text-center leading-tight select-none">{{ item.title }}</span>
                 </div>
               </template>
-              
               <span class="absolute top-4 right-4 bg-primary text-dark-900 text-xs font-bold px-3 py-1 rounded-full shadow-lg z-10">
                 {{ item.category }}
               </span>
-
-              <!-- <a :href="`${ADMIN_URL}/admin/services/${item.id}/edit`" 
-                 target="_blank"
-                 class="absolute top-4 left-4 bg-white/90 text-slate-700 p-2 rounded-full shadow-lg hover:bg-red-500 hover:text-white transition-all duration-300 z-10 opacity-0 group-hover:opacity-100 translate-y-[-10px] group-hover:translate-y-0"
-                 title="Edit di Admin Panel">
-                 <Edit :size="16" />
-              </a> -->
-
             </div>
 
-            <div class="p-6">
-              <h4 class="text-lg font-bold mb-2 transition-colors group-hover:text-primary" :class="isScrolled ? 'text-slate-900' : 'text-white'">
-                {{ item.title }}
-              </h4>
-              <p class="text-sm line-clamp-2 mb-4 transition-colors" :class="isScrolled ? 'text-slate-500' : 'text-gray-400'">
-                {{ item.desc }}
-              </p>
+            <div class="p-6 relative">
+              
+              <div class="relative group/title w-fit mb-2 cursor-help">
+                <h4 class="text-lg font-bold transition-colors group-hover:text-primary line-clamp-1" 
+                    :class="isScrolled ? 'text-slate-900' : 'text-white'">
+                  {{ item.title }}
+                </h4>
+                
+                <div class="absolute bottom-full left-0 mb-2 w-max max-w-[250px] p-2 bg-dark-900/95 backdrop-blur text-white text-xs rounded shadow-xl opacity-0 invisible group-hover/title:opacity-100 group-hover/title:visible transition-all duration-300 z-50 pointer-events-none border border-white/10">
+                   {{ item.title }}
+                   <div class="absolute top-full left-4 -mt-1 border-4 border-transparent border-t-dark-900/95"></div>
+                </div>
+              </div>
+
+              <div class="relative group/desc mb-4 cursor-help">
+                <p class="text-sm line-clamp-2 transition-colors" 
+                   :class="isScrolled ? 'text-slate-500' : 'text-gray-400'">
+                  {{ item.desc }}
+                </p>
+
+                <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-[280px] p-4 bg-dark-900/95 backdrop-blur-md text-white text-xs leading-relaxed rounded-xl shadow-2xl border border-white/10 opacity-0 invisible group-hover/desc:opacity-100 group-hover/desc:visible transition-all duration-300 z-50 pointer-events-none transform translate-y-2 group-hover/desc:translate-y-0">
+                  <span class="font-bold text-primary block mb-1 text-[10px] uppercase tracking-wider">Detail Lengkap:</span>
+                  {{ item.desc }}
+                  <div class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-dark-900/95"></div>
+                </div>
+              </div>
               
               <div class="h-px w-full mb-4" :class="isScrolled ? 'bg-slate-100' : 'bg-white/10'"></div>
 

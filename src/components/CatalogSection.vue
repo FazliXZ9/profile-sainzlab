@@ -126,7 +126,7 @@ const generateEmailLink = (item) => {
                 </p>
 
                 <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-[280px] p-4 bg-dark-900/95 backdrop-blur-md text-white text-xs leading-relaxed rounded-xl shadow-2xl border border-white/10 opacity-0 invisible group-hover/desc:opacity-100 group-hover/desc:visible transition-all duration-300 z-50 pointer-events-none transform translate-y-2 group-hover/desc:translate-y-0">
-                  <span class="font-bold text-primary block mb-1 text-[10px] uppercase tracking-wider">Detail Lengkap:</span>
+                  <span class="font-bold text-primary block mb-1 text-[10px] uppercase tracking-wider">Detail Lengkap</span>
                   {{ item.desc }}
                   <div class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-dark-900/95"></div>
                 </div>

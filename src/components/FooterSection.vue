@@ -20,7 +20,7 @@ defineProps(['isScrolled'])
         </div>
         
         <div class="flex gap-4">
-           <a href="https://github.com/FazliXZ9" :class="isScrolled ? 'border-slate-200 text-slate-400 hover:bg-slate-100' : 'border-white/10 text-gray-400 hover:bg-white hover:text-dark-900'" 
+           <a href="https://github.com/Sainzlab" :class="isScrolled ? 'border-slate-200 text-slate-400 hover:bg-slate-100' : 'border-white/10 text-gray-400 hover:bg-white hover:text-dark-900'" 
               class="w-10 h-10 rounded-full border flex items-center justify-center transition-all hover:scale-110 active:scale-95">
               <Github :size="20"/>
            </a>
@@ -48,7 +48,7 @@ defineProps(['isScrolled'])
       
       <div class="text-center text-sm border-t pt-8 transition-colors duration-500"
            :class="isScrolled ? 'text-slate-500 border-slate-200' : 'text-gray-600 border-white/5'">
-        &copy; 2025 Sainzlab.my.id | Muhammad Fazli M
+        &copy;2026 Sainzlab.my.id | Muhammad Fazli M
       </div>
     </div>
   </footer>
